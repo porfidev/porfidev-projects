@@ -17,6 +17,7 @@ ingress:
 services:
  - name: porfidev-website
    environment_slug: node-js
+   source_dir: apps/porfidev-website
    instance_count: 1
    instance_size_slug: apps-s-1vcpu-0.5gb
    http_port: 8080
@@ -27,8 +28,18 @@ services:
      - key: PORT
        scope: RUN_AND_BUILD_TIME
        value: "8080"
-   build_command: pnpm --filter porfidev-website build
-   run_command: pnpm --filter porfidev-website start
+     - key: NODE_VERSION
+       value: "20"
+       scope: RUN_AND_BUILD_TIME
+     - key: NPM_CONFIG_PRODUCTION
+       value: "false"
+       scope: BUILD_TIME
+   build_command: >
+     corepack enable &&
+     corepack prepare pnpm@10.20.0 --activate &&
+     pnpm i --frozen-lockfile &&
+     pnpm build
+   run_command: pnpm start
    github:
     branch: main
     deploy_on_push: true
