@@ -1,3 +1,4 @@
 [submodule "apps/porfidev-website"]
 	path = apps/porfidev-website
 	url = git@github.com:porfidev/porfidev-website.git
+	branch = main
