@@ -11,8 +11,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "20.x",
-    "pnpm": "10.20.0"
+    "node": "20.x"
   },
   "packageManager": "pnpm@10.20.0"
 }
