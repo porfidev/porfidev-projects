@@ -1,21 +1,24 @@
 name: porfidev-projects
 services:
-  -name: porfidev-website
-  source_dir: apps/porfidev-website
-  environment_slug: node-js
-  http_port: 8080
-  build_command: >
-    corepack enable &&
-    corepack prepare pnpm@10.20.0 --activate &&
-    pnpm i --frozen-lockfile &&
-    pnpm --filter porfidev-website build
-  run_command: pnpm --filter porfidev-website start
-  routes:
-    - path: /
-      domain: porfi.dev
-  envs:
-    - key: NODE_ENV
-      value: "production"
-    - key: PORT
-      value: "8080"
+  - name: porfidev-website
+    source_dir: apps/porfidev-website
+    environment_slug: node-js
+    http_port: 8080
+    build_command: >
+      corepack enable &&
+      corepack prepare pnpm@10.20.0 --activate &&
+      pnpm i --frozen-lockfile &&
+      pnpm --filter porfidev-website build
+    run_command: pnpm --filter porfidev-website start
+    routes:
+      - path: /
+        domain: porfi.dev
+    envs:
+      - key: NODE_ENV
+        value: "production"
+      - key: PORT
+        value: "8080"
+    git:
+      branch: main
+      repo_clone_url: https://github.com/porfidev/porfidev-projects.git
 
