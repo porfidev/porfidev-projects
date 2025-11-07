@@ -1,0 +1,37 @@
+name: projects-porfidev
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+region: atl
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: porfidev-website
+      match:
+        authority:
+          exact: ""
+        path:
+          prefix: /
+services:
+ - name: porfidev-website
+   environment_slug: node-js
+   instance_count: 1
+   instance_size_slug: apps-s-1vcpu-0.5gb
+   http_port: 8080
+   envs:
+     - key: NODE_ENV
+       scope: RUN_AND_BUILD_TIME
+       value: production
+     - key: PORT
+       scope: RUN_AND_BUILD_TIME
+       value: "8080"
+   build_command: pnpm --filter porfidev-website build
+   run_command: pnpm --filter porfidev-website start
+   github:
+    branch: main
+    deploy_on_push: true
+    repo: porfidev/porfidev-projects
+
+

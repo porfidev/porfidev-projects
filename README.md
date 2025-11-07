@@ -193,6 +193,23 @@ pnpm --filter demo-canvas dev
 
 ---
 
+## 🌊 Publicación en Digital Ocean - App Platform
+
+- Elegir el repo desde Git
+* Info
+  * Resource type
+    - Web Service
+- Deployment settings
+  - Build command
+  - ``` pnpm --filter porfidev-website build ```
+  - Run command
+  - ``` pnpm --filter porfidev-website start ```
+- Network
+  - Public HTTP Port
+  - ``` 8080 ```
+  - HTTP request routes
+  - ``` / ```
+
 ## 📜 Licencia
 
 ISC — © PorfiDev
