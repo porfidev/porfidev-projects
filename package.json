@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev-website": "pnpm --filter porfidev-website dev",
+    "build-website": "pnpm --filter porfidev-website build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
