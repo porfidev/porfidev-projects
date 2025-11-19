@@ -34,13 +34,8 @@ services:
      - key: NPM_CONFIG_PRODUCTION
        value: "false"
        scope: BUILD_TIME
-   build_command: >
-     corepack enable &&
-     corepack prepare pnpm@10.20.0 --activate &&
-     pnpm install --frozen-lockfile &&
-     pnpm exec patch-package || true &&
-     pnpm build
-   run_command: pnpm start
+   build_command: npm install && npm run build
+   run_command: npm start
    github:
     branch: main
     deploy_on_push: true
