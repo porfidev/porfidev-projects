@@ -37,7 +37,7 @@ services:
    build_command: >
      corepack enable &&
      corepack prepare pnpm@10.20.0 --activate &&
-     pnpm i --frozen-lockfile &&
+     pnpm install --frozen-lockfile &&
      pnpm exec patch-package || true &&
      pnpm build
    run_command: pnpm start
