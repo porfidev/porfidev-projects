@@ -1,8 +1,9 @@
-name: projects-porfidev
 alerts:
   - rule: DEPLOYMENT_FAILED
   - rule: DOMAIN_FAILED
-region: atl
+domains:
+  - domain: porfi.dev
+    type: PRIMARY
 features:
   - buildpack-stack=ubuntu-22
 ingress:
@@ -14,31 +15,32 @@ ingress:
           exact: ""
         path:
           prefix: /
+name: projects-porfidev
+region: atl
 services:
- - name: porfidev-website
-   environment_slug: node-js
-   source_dir: apps/porfidev-website
-   instance_count: 1
-   instance_size_slug: apps-s-1vcpu-0.5gb
-   http_port: 8080
-   envs:
-     - key: NODE_ENV
-       scope: RUN_AND_BUILD_TIME
-       value: production
-     - key: PORT
-       scope: RUN_AND_BUILD_TIME
-       value: "8080"
-     - key: NODE_VERSION
-       value: "20"
-       scope: RUN_AND_BUILD_TIME
-     - key: NPM_CONFIG_PRODUCTION
-       value: "false"
-       scope: BUILD_TIME
-   build_command: npm install && npm run build
-   run_command: npm start
-   github:
-    branch: main
-    deploy_on_push: true
-    repo: porfidev/porfidev-projects
-
+  - build_command: npm install && npm run build
+    environment_slug: node-js
+    envs:
+      - key: NODE_ENV
+        scope: RUN_AND_BUILD_TIME
+        value: production
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "8080"
+      - key: NODE_VERSION
+        scope: RUN_AND_BUILD_TIME
+        value: "20"
+      - key: NPM_CONFIG_PRODUCTION
+        scope: RUN_AND_BUILD_TIME
+        value: "false"
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: porfidev/porfidev-projects
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: porfidev-website
+    run_command: npm run start
+    source_dir: apps/porfidev-website
 
