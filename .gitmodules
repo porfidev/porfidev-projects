@@ -2,3 +2,7 @@
 	path = apps/porfidev-website
 	url = https://github.com/porfidev/porfidev-website.git
 	branch = main
+[submodule "apps/telovendo-api"]
+	path = apps/telovendo-api
+	url = https://github.com/porfidev/telovendo-api.git
+	branch = main
