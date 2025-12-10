@@ -4,6 +4,7 @@ alerts:
 domains:
   - domain: porfi.dev
     type: PRIMARY
+  - domain: telovendo-api.porfi.dev
 features:
   - buildpack-stack=ubuntu-22
 ingress:
@@ -15,6 +16,13 @@ ingress:
           exact: ""
         path:
           prefix: /
+    - component:
+        name: telovendo-api
+      match:
+          authority:
+            exact: telovendo-api.porfi.dev
+          path:
+            prefix: /
 name: projects-porfidev
 region: atl
 services:
@@ -43,4 +51,31 @@ services:
     name: porfidev-website
     run_command: npm run start
     source_dir: apps/porfidev-website
+  - build_command: npm install & npm run build
+    environment_slug: node-js
+    envs:
+      - key: NODE_ENV
+        scope: RUN_AND_BUILD_TIME
+        value: production
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "8080"
+      - key: NODE_VERSION
+        scope: RUN_AND_BUILD_TIME
+        value: "20"
+      - key: NPM_CONFIG_PRODUCTION
+        scope: RUN_AND_BUILD_TIME
+        value: "false"
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: porfidev/porfidev-projects
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: telovendo-api
+    run_command: npm run start
+    source_dir: apps/telovendo-api
+
+
 
